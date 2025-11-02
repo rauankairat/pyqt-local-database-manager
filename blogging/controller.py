@@ -1,6 +1,7 @@
 
 class Controller:
     def __init__(self):
+        self.id = 0
         self.username = 'user'
         self.password = 'blogging2025'
         self.logged_in = False 
@@ -17,3 +18,17 @@ class Controller:
             return True
         else:
             return False
+
+    def search_blog(self, id):
+        
+        for element in self.blog:
+            if (element.id = id):
+                return blog
+            return None
+            
+
+
+        
+        
+       
+
