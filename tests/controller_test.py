@@ -1,8 +1,8 @@
 from unittest import TestCase
 from unittest import main
 from blogging.controller import Controller
-from blogging.blog import Blog
-from blogging.post import Post
+# from blogging.blog import Blog
+# from blogging.post import Post
 
 class ControllerTest(TestCase):
 
