@@ -31,12 +31,20 @@ class Controller:
             return blog
 
     def search_blog(self, id):
+
+        
         
         for element in self.blog:
             if (element.id = id):
                 return blog
             return None
-            
+
+    def retrieve_blogs(self, name):
+
+
+
+    
+   
 
 
         
