@@ -93,6 +93,32 @@ class Controller:
 
         return self.blogs
     
+    def retrieve_posts(self,text):
+
+        if not self.logged_in:
+            return None
+
+     
+
+        post_list = []
+
+        for blog in self.blogs:
+
+            if text in post.text:
+                post_list.append(post)
+
+            else if text in post.title:
+                post_list.append(post)
+
+        return post_list
+
+
+        
+
+        
+
+        
+
     def set_current_blog(self, bid):
         if not self.logged_in:
             return None
