@@ -92,14 +92,6 @@ class Controller:
             return None
 
         return self.blogs
-
-    
-    def list_blogs(self):
-
-        if not self.logged_in:
-            return None
-
-        return self.blogs
     
     def set_current_blog(self, bid):
         if not self.logged_in:
