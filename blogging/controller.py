@@ -1,3 +1,5 @@
+from blogging.blog import Blog
+
 
 class Controller:
     def __init__(self):
@@ -33,9 +35,7 @@ class Controller:
     def search_blog(self, id):
         if not self.logged_in:
             return None
-
         for blog in self.blogs:
-
             if (blog.id == id):
                 return blog
         return None
@@ -55,7 +55,23 @@ class Controller:
     def delete_blog(self,id):
 
         if not self.logged_in:
-            return None
+        return None
+
+    def update_blog(self, bid, new_bid, name,url,email):
+        if not self.blogs:
+            return False
+        if self.search_blog(new_bid)!=None and bid!=new_bid:
+            return False
+        blog = self.search_blog(bid)
+        if blog!=None:
+            blog.id = new_bid
+            blog.name = name
+            blog.url = url
+            blog.email=email
+            return True
+        return False
+        
+
 
         blog_to_delete = self.search_blog(id)
 
