@@ -97,15 +97,15 @@ class Controller:
 
         if not self.logged_in:
             return None
+        
+        if not self.current_blog:
+            return None
 
         post_list = []
 
         for blog in self.blogs:
 
-            if text in post.text:
-                post_list.append(post)
-
-            else if text in post.title:
+            if text in self.post.text or text self.post.title:
                 post_list.append(post)
 
         return post_list
@@ -141,7 +141,8 @@ class Controller:
             return None
         post = self.current_blog.search_post(code)
         return post
-            
+    
+    def delete_post();
             
 
 
