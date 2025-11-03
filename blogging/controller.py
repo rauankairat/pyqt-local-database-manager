@@ -84,7 +84,7 @@ class Controller:
         if not self.logged_in:
             return None
 
-        return blog
+        return self.blogs
 
     
 
