@@ -31,15 +31,35 @@ class Controller:
             return blog
 
     def search_blog(self, id):
-
-        
-        
-        for element in self.blog:
-            if (element.id = id):
-                return blog
+        if not self.logged_in:
             return None
 
+        for blog in self.blogs:
+
+            if (blog.id == id):
+                return blog
+        return None
+
     def retrieve_blogs(self, name):
+        if not self.logged_in:
+            return None
+
+        blog_list = []
+
+        for blog in self.blogs:
+
+            if name in blog.name:
+                blog_list.append(blog)
+        return blog_list
+                
+                
+            
+            
+
+
+            
+
+
 
 
 
