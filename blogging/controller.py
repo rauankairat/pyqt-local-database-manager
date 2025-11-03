@@ -92,23 +92,6 @@ class Controller:
             return None
 
         return self.blogs
-    
-    def retrieve_posts(self,text):
-
-        if not self.logged_in:
-            return None
-        
-        if not self.current_blog:
-            return None
-
-        post_list = []
-
-        for blog in self.blogs:
-
-            if text in self.post.text or text self.post.title:
-                post_list.append(post)
-
-        return post_list
 
 
     def set_current_blog(self, bid):
@@ -141,6 +124,23 @@ class Controller:
             return None
         post = self.current_blog.search_post(code)
         return post
+
+        def retrieve_posts(self,text):
+
+        if not self.logged_in:
+            return None
+        
+        if not self.current_blog:
+            return None
+
+        post_list = []
+
+        for blog in self.blogs:
+
+            if text in self.post.text or text self.post.title:
+                post_list.append(post)
+
+        return post_list
     
     def delete_post();
             
