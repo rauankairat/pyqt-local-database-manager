@@ -98,8 +98,6 @@ class Controller:
         if not self.logged_in:
             return None
 
-     
-
         post_list = []
 
         for blog in self.blogs:
@@ -112,12 +110,6 @@ class Controller:
 
         return post_list
 
-
-        
-
-        
-
-        
 
     def set_current_blog(self, bid):
         if not self.logged_in:
