@@ -47,7 +47,6 @@ class Controller:
         blog_list = []
 
         for blog in self.blogs:
-
             if name in blog.name:
                 blog_list.append(blog)
         return blog_list
@@ -55,7 +54,15 @@ class Controller:
     def delete_blog(self,id):
 
         if not self.logged_in:
-        return None
+            return None
+                
+        blog_to_delete = self.search_blog(id)
+
+        if blog_to_delete is None:
+            return False
+        else:
+            self.blogs.remove(blog_to_delete)
+            return True
 
     def update_blog(self, bid, new_bid, name,url,email):
         if not self.blogs:
@@ -70,14 +77,7 @@ class Controller:
             blog.email=email
             return True
         return False
-        
-        blog_to_delete = self.search_blog(id)
 
-        if blog_to_delete is None:
-            return False
-        else
-            blogs.remove(blog_to_delete)
-            return True
                 
             
             
