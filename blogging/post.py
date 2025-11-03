@@ -7,3 +7,6 @@ class Post:
         self.text = text
         self.creation = datetime.datetime.now()
         self.update = datetime.datetime.now()
+
+    def __eq__(self,post):
+        return self.code==post.code and self.title==post.title and self.text==post.text

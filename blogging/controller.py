@@ -1,5 +1,5 @@
 from blogging.blog import Blog
-
+from blogging.post import Post
 
 class Controller:
     def __init__(self):
@@ -108,7 +108,21 @@ class Controller:
             return None
         self.current_blog=None
 
-                
+    def create_post(self, title, text):
+        if not self.logged_in:
+            return None
+        if not self.current_blog:
+            return None
+        code = self.current_blog.post_count+1
+        return self.current_blog.create_post(code,title,text)
+
+    def search_post(self,code):
+        if not self.logged_in:
+            return None
+        if not self.current_blog:
+            return None
+        post = self.current_blog.search_post(code)
+        return post
             
             
 
