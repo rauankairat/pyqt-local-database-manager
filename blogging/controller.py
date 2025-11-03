@@ -8,6 +8,7 @@ class Controller:
         self.password = 'blogging2025'
         self.logged_in = False 
         self.blogs = []
+        self.current_blog = None
 
     def login(self, name, password):
         if self.username == name and self.password == password and not self.logged_in:
@@ -58,6 +59,9 @@ class Controller:
                 
         blog_to_delete = self.search_blog(id)
 
+        if blog_to_delete == self.current_blog:
+            return False
+
         if blog_to_delete is None:
             return False
         else:
@@ -65,11 +69,15 @@ class Controller:
             return True
 
     def update_blog(self, bid, new_bid, name,url,email):
+        if not self.logged_in:
+            return False
         if not self.blogs:
             return False
         if self.search_blog(new_bid)!=None and bid!=new_bid:
             return False
         blog = self.search_blog(bid)
+        if blog == self.current_blog:
+            return False
         if blog!=None:
             blog.id = new_bid
             blog.name = name
@@ -77,7 +85,6 @@ class Controller:
             blog.email=email
             return True
         return False
-
     
     def list_blogs(self):
 
@@ -86,10 +93,21 @@ class Controller:
 
         return self.blogs
 
-    
+    def set_current_blog(self, bid):
+        if not self.logged_in:
+            return None
+        self.current_blog = self.search_blog(bid)
 
-
+    def get_current_blog(self):
+        if not self.logged_in:
+            return None
+        return self.current_blog
     
+    def unset_current_blog(self):
+        if not self.logged_in:
+            return None
+        self.current_blog=None
+
                 
             
             
