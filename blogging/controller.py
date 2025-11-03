@@ -51,7 +51,19 @@ class Controller:
             if name in blog.name:
                 blog_list.append(blog)
         return blog_list
-                
+    
+    def delete_blog(self,id):
+
+        if not self.logged_in:
+            return None
+
+        blog_to_delete = self.search_blog(id)
+
+        if blog_to_delete is None:
+            return False
+        else
+            blogs.remove(blog_to_delete)
+            return True
                 
             
             
