@@ -81,6 +81,13 @@ class Controller:
     
     def list_blogs(self):
 
+        if not self.logged_in:
+            return None
+
+        return blog
+
+    
+
 
     
                 
