@@ -78,6 +78,11 @@ class Controller:
             return True
         return False
 
+    
+    def list_blogs(self):
+
+
+    
                 
             
             
