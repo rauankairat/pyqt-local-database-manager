@@ -71,8 +71,6 @@ class Controller:
             return True
         return False
         
-
-
         blog_to_delete = self.search_blog(id)
 
         if blog_to_delete is None:
