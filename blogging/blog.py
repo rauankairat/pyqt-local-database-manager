@@ -26,4 +26,14 @@ class Blog:
                 return post
         return None
 
+    def retrieve(self,text):
+        post_list = []
+
+        for post in self.posts:
+
+            if (text in post.title) or (text in post.text):
+                post_list.append(post)
+
+        return post_list
+
     

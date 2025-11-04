@@ -55,7 +55,7 @@ class Controller:
     def delete_blog(self,id):
 
         if not self.logged_in:
-            return None
+            return False
                 
         blog_to_delete = self.search_blog(id)
 
@@ -92,7 +92,14 @@ class Controller:
             return None
 
         return self.blogs
+    
+    def retrieve_posts(self, text):
+        if not self.logged_in:
+         return None
+        if not self.current_blog:
+         return None
 
+        return self.current_blog.retrieve(text)
 
     def set_current_blog(self, bid):
         if not self.logged_in:
@@ -142,21 +149,30 @@ class Controller:
 
         return post_list
     
-    def delete_post();
+    def delete_post(self, code):
+
+        if not self.logged_in:
+            return False
+        if not self.current_blog:
+            return False
             
+        post_to_delete = self.search_post(code)
 
+        if post_to_delete == None:
+            return False
+        else:
+            self.current_blog.posts.remove(post_to_delete)
+            return True
 
-            
+    def list_posts(self):
+        if not self.logged_in:
+            return None
 
-
-
-
-
-    
-   
-
-
+        if not self.current_blog:
+            return None
         
+        if not self.blogs:
+            return None
         
-       
+        return list(reversed(self.current_blog.posts))
 
