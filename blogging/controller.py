@@ -132,7 +132,7 @@ class Controller:
         post = self.current_blog.search_post(code)
         return post
 
-        def retrieve_posts(self,text):
+    def retrieve_posts(self,text):
 
         if not self.logged_in:
             return None
@@ -144,17 +144,18 @@ class Controller:
 
         for blog in self.blogs:
 
-            if text in self.post.text or text self.post.title:
+            if text in self.post.text or text in self.post.title:
                 post_list.append(post)
 
         return post_list
-    
-    def delete_post(self, code):
 
-        if not self.logged_in:
-            return False
+    def update_post(self, code,title,text):
         if not self.current_blog:
-            return False
+            return None
+        return self.current_blog.update_post(code,title,text)
+    
+    def delete_post():
+        pass
             
         post_to_delete = self.search_post(code)
 

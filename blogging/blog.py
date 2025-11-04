@@ -1,4 +1,5 @@
 from blogging.post import Post
+import datetime
 
 class Blog:
     def __init__(self,bid,name,url,email):
@@ -36,4 +37,13 @@ class Blog:
 
         return post_list
 
+    def update_post(self, code,title,text):
+        post = self.search_post(code)
+        if post!=None:
+            post.code = code
+            post.title = title
+            post.text = text
+            post.update = datetime.datetime.now()
+            return True
+        return False
     

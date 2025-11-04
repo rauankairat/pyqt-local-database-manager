@@ -9,4 +9,6 @@ class Post:
         self.update = datetime.datetime.now()
 
     def __eq__(self,post):
+        if post == None:
+            return False
         return self.code==post.code and self.title==post.title and self.text==post.text
