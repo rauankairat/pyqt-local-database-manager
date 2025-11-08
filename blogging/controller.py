@@ -102,18 +102,19 @@ class Controller:
         return self.blogs
     
 
-    # Choose current blog 
+    # Set current blog 
     def set_current_blog(self, bid):
         if not self.logged_in:
             return None
         self.current_blog = self.search_blog(bid)
 
-    #
+    # Choose current blog 
     def get_current_blog(self):
         if not self.logged_in:
             return None
         return self.current_blog
     
+    # Unset current blog 
     def unset_current_blog(self):
         if not self.logged_in:
             return None
@@ -128,6 +129,7 @@ class Controller:
         code = self.current_blog.post_count+1
         return self.current_blog.create_post(code,title,text)
 
+    # Searches for post
     def search_post(self,code):
         if not self.logged_in:
             return None
@@ -136,12 +138,13 @@ class Controller:
         post = self.current_blog.search_post(code)
         return post
 
+    #Updates post
     def update_post(self, code,title,text):
         if not self.current_blog:
             return None
         return self.current_blog.update_post(code,title,text)
 
-#Retrieve existing posts from the current blog
+    #Retrieve existing posts from the current blog
     def retrieve_posts(self, text):
 
         if not self.logged_in:

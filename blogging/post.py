@@ -8,6 +8,7 @@ class Post:
         self.creation = datetime.datetime.now()
         self.update = datetime.datetime.now()
 
+    #Check if two Post objects are equal based on their codes titles and text
     def __eq__(self,post):
         if post == None:
             return False
