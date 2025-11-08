@@ -10,12 +10,14 @@ class Controller:
         self.blogs = []
         self.current_blog = None
 
+    # Log in 
     def login(self, name, password):
         if self.username == name and self.password == password and not self.logged_in:
             self.logged_in = True
             return True
         return False
-
+    
+    # Log out 
     def logout(self):
         if self.logged_in:
             self.logged_in = False
@@ -23,6 +25,7 @@ class Controller:
         else:
             return False
 
+    #Create new blog 
     def create_blog(self, bid, name,url,email):
         if self.search_blog(bid)!=None:
             return None
@@ -33,6 +36,7 @@ class Controller:
             self.blogs.append(blog)
             return blog
 
+    #Search blog
     def search_blog(self, id):
         if not self.logged_in:
             return None
@@ -41,6 +45,7 @@ class Controller:
                 return blog
         return None
 
+    # Retrieve existing blogs 
     def retrieve_blogs(self, name):
         if not self.logged_in:
             return None
@@ -52,6 +57,7 @@ class Controller:
                 blog_list.append(blog)
         return blog_list
     
+    #Delete existing blog 
     def delete_blog(self,id):
 
         if not self.logged_in:
@@ -68,6 +74,7 @@ class Controller:
             self.blogs.remove(blog_to_delete)
             return True
 
+    # Update existing blog 
     def update_blog(self, bid, new_bid, name,url,email):
         if not self.logged_in:
             return False
@@ -86,6 +93,7 @@ class Controller:
             return True
         return False
     
+    #List all blogs
     def list_blogs(self):
 
         if not self.logged_in:
@@ -93,19 +101,14 @@ class Controller:
 
         return self.blogs
     
-    def retrieve_posts(self, text):
-        if not self.logged_in:
-         return None
-        if not self.current_blog:
-         return None
 
-        return self.current_blog.retrieve(text)
-
+    # Choose current blog 
     def set_current_blog(self, bid):
         if not self.logged_in:
             return None
         self.current_blog = self.search_blog(bid)
 
+    #
     def get_current_blog(self):
         if not self.logged_in:
             return None
@@ -116,6 +119,7 @@ class Controller:
             return None
         self.current_blog=None
 
+    #Create new post in the current blog
     def create_post(self, title, text):
         if not self.logged_in:
             return None
@@ -132,48 +136,55 @@ class Controller:
         post = self.current_blog.search_post(code)
         return post
 
-    def retrieve_posts(self,text):
-
-        if not self.logged_in:
-            return None
-        
-        if not self.current_blog:
-            return None
-
-        post_list = []
-
-        for blog in self.blogs:
-
-            if text in self.post.text or text in self.post.title:
-                post_list.append(post)
-
-        return post_list
-
     def update_post(self, code,title,text):
         if not self.current_blog:
             return None
         return self.current_blog.update_post(code,title,text)
-    
-    def delete_post():
-        pass
+
+#Retrieve existing posts from the current blog
+    def retrieve_posts(self, text):
+
+        if not self.logged_in:
+          return None
+        
+        if self.current_blog is None:
+            return None
+        
+        if not self.current_blog.posts:
+            return []
+
+        return self.current_blog.retrieve(text)
+
+
+    #Delete existing post in the current blog
+    def delete_post(self, code):
+
+        if not self.logged_in:
+            return False
+        if self.current_blog is None:
+            return False
             
         post_to_delete = self.search_post(code)
 
-        if post_to_delete == None:
+        if post_to_delete is None:
             return False
         else:
             self.current_blog.posts.remove(post_to_delete)
             return True
 
+    #List all posts from the current blog
     def list_posts(self):
         if not self.logged_in:
             return None
 
-        if not self.current_blog:
+        if self.current_blog is None:
             return None
         
         if not self.blogs:
             return None
+        
+        if not self.current_blog.posts:
+            return []
         
         return list(reversed(self.current_blog.posts))
 
