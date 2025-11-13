@@ -1,0 +1,76 @@
+Assignment 2 Grading:
+---------------------
+Student Group "group033" (Tugrul Basar Uysal & Rauan Kairat)
+Grade: 81/100, 81%
+
+Python test results:
+------------------------
+
+Results for controller_test.py:
+
+test_create_post (tests.controller_test.ControllerTest) ... ok
+test_create_search_blog (tests.controller_test.ControllerTest) ... ok
+test_delete_blog (tests.controller_test.ControllerTest) ... ok
+test_delete_post (tests.controller_test.ControllerTest) ... ok
+test_list_blogs (tests.controller_test.ControllerTest) ... ok
+test_list_posts (tests.controller_test.ControllerTest) ... ok
+test_login_logout (tests.controller_test.ControllerTest) ... ok
+test_retrieve_blogs (tests.controller_test.ControllerTest) ... ok
+test_retrieve_posts (tests.controller_test.ControllerTest) ... ok
+test_set_get_current_blog (tests.controller_test.ControllerTest) ... ok
+test_update_blog (tests.controller_test.ControllerTest) ... ok
+test_update_post (tests.controller_test.ControllerTest) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.001s
+
+OK
+
+blog_test.py: Missing test file.
+post_test.py: Missing test file.
+
+Summary:
+Passed tests: 12
+Failed tests: 0
+
+Unit tests: 0/15 points, did not include files.
+Controller tests: 60/60 points.
+
+Version Control (git log):
+--------------------------
+101fc49	Rauan Kairat	Fri Nov 7 22:15:22 2025 -0800	Add more comments
+41a0884	Rauan Kairat	Fri Nov 7 20:29:58 2025 -0800	Fixed retrieve, delete, list post and add comments
+be2517b	Tugrul Basar Uysal	Mon Nov 3 23:39:16 2025 -0800	finished post update and merger with delete and retrieve
+e25a707	Rauan Kairat	Mon Nov 3 22:57:01 2025 -0800	Add List post and Delete post
+b57cc50	Tugrul Basar Uysal	Sun Nov 2 17:50:10 2025 -0800	fixed function placing
+262bfcf	Rauan Kairat	Sun Nov 2 17:48:40 2025 -0800	Fixed retrieve post
+1e4deba	Rauan Kairat	Sun Nov 2 17:43:55 2025 -0800	Add retrieve post
+e637cde	Rauan Kairat	Sun Nov 2 17:35:57 2025 -0800	Add retrive post
+14237ff	Tugrul Basar Uysal	Sun Nov 2 17:38:42 2025 -0800	added create post
+a78836a	Tugrul Basar Uysal	Sun Nov 2 17:17:41 2025 -0800	fixed issue with post
+be28685	Tugrul Basar Uysal	Sun Nov 2 17:16:10 2025 -0800	added post class
+a0e0a0e	Tugrul Basar Uysal	Sun Nov 2 17:02:44 2025 -0800	fixed merge error
+92f1011	Tugrul Basar Uysal	Sun Nov 2 16:55:00 2025 -0800	merged current with list
+cbc2dea	Tugrul Basar Uysal	Sun Nov 2 16:45:27 2025 -0800	added set, get, unset current blog
+89baf4a	Rauan Kairat	Sun Nov 2 16:48:58 2025 -0800	Fixed list_blogs
+e50d023	Rauan Kairat	Sun Nov 2 16:46:08 2025 -0800	List_blogs
+5fad65e	Rauan Kairat	Sun Nov 2 16:37:13 2025 -0800	list_blogs
+d691341	Tugrul Basar Uysal	Sun Nov 2 16:35:46 2025 -0800	fixed merge error and tested update delete and retrieve
+ca7f67c	Tugrul Basar Uysal	Sun Nov 2 16:32:44 2025 -0800	merged update,retrieve and delete
+cc8fdeb	Tugrul Basar Uysal	Sun Nov 2 16:27:22 2025 -0800	passed update tests
+fdc35cf	Rauan Kairat	Sun Nov 2 16:27:29 2025 -0800	Add delete blog
+c45342f	Rauan Kairat	Sun Nov 2 16:14:49 2025 -0800	Add retrieve search
+e49144b	Rauan Kairat	Sun Nov 2 15:56:19 2025 -0800	retrieve_blogs
+bd7aa2a	Tugrul Basar Uysal	Sun Nov 2 15:34:36 2025 -0800	added blog class
+5d8de31	Rauan Kairat	Sun Nov 2 15:35:48 2025 -0800	Add search blog
+5a2db9d	Tugrul Basar Uysal	Sun Nov 2 15:13:45 2025 -0800	login logout complete
+959d076	Roberto Bittencourt	Tue Oct 21 14:14:13 2025 -0700	Added controller tests and configuration files
+c025491	Roberto Bittencourt	Tue Oct 21 21:08:52 2025 +0000	Initial commit
+
+Solid commit log, describing collaborative progression. 5/5 points.
+
+Modularization: 8/10 points, some functionality should be moved to post.py. 
+Documentation: 10/10 points.
+
+Other remarks:
+Missing student info files described in assignment specification (-2 points).
