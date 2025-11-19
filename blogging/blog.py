@@ -43,13 +43,19 @@ class Blog:
         return post_list
 
     # Updates an existing post’s title and text, identified by its code
-    def update_post(self, code,title,text):
-        post = self.search_post(code)
-        if post!=None:
-            post.code = code
-            post.title = title
-            post.text = text
-            post.update = datetime.datetime.now()
-            return True
-        return False
+    	def update_post(self, code, new_title, new_text):
+		''' update a post from the blog '''
+		updated_post = None
+
+		for post in self.posts:
+			if post.code == code:
+				updated_post = post
+				break
+
+		if not updated_post:
+			return False
+
+		updated_post.update(new_title, new_text)
+		return True
+
     
