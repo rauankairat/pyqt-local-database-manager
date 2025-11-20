@@ -1,37 +1,54 @@
 from blogging.blog import Blog
 from blogging.post import Post
+from blogging.exception.invalid_login_exception import InvalidLoginException
+from blogging.exception.duplicate_login_exception import DuplicateLoginException
+from blogging.exception.invalid_logout_exception import InvalidLogoutException
+from blogging.exception.illegal_access_exception import IllegalAccessException
+from blogging.exception.illegal_operation_exception import IllegalOperationException
+from blogging.exception.no_current_blog_exception import NoCurrentBlogException
+import hashlib
+import os
 
 class Controller:
     def __init__(self):
         self.id = 0
-        self.username = 'user'
-        self.password = 'blogging2025'
-        self.logged_in = False 
+        self.logged_in = False
         self.blogs = []
         self.current_blog = None
+        self.users = {}
+        path = os.path.join(os.path.dirname(__file__), "users.txt")
+        with open(path, "r") as usersFile:
+            for line in usersFile:
+                [name, password] = line.split(',')
+                self.users[name] = password
+        print(self.users)
 
-    # Log in 
+
+    # Log in
     def login(self, name, password):
-        if self.username == name and self.password == password and not self.logged_in:
-            self.logged_in = True
-            return True
-        return False
-    
-    # Log out 
+        if self.logged_in:
+            raise DuplicateLoginException
+        for user in self.users:
+            if user == name and self.users[user] == password:
+                self.logged_in = True
+                return True
+        raise InvalidLoginException
+
+    # Log out
     def logout(self):
         if self.logged_in:
             self.logged_in = False
             return True
         else:
-            return False
+            raise InvalidLogoutException
 
-    #Create new blog 
+    #Create new blog
     def create_blog(self, bid, name,url,email):
         if self.search_blog(bid)!=None:
             return None
         if not self.logged_in:
             return None
-        else: 
+        else:
             blog = Blog(bid,name,url,email)
             self.blogs.append(blog)
             return blog
@@ -45,7 +62,7 @@ class Controller:
                 return blog
         return None
 
-    # Retrieve existing blogs 
+    # Retrieve existing blogs
     def retrieve_blogs(self, name):
         if not self.logged_in:
             return None
@@ -56,13 +73,13 @@ class Controller:
             if name in blog.name:
                 blog_list.append(blog)
         return blog_list
-    
-    #Delete existing blog 
+
+    #Delete existing blog
     def delete_blog(self,id):
 
         if not self.logged_in:
             return False
-                
+
         blog_to_delete = self.search_blog(id)
 
         if blog_to_delete == self.current_blog:
@@ -74,7 +91,7 @@ class Controller:
             self.blogs.remove(blog_to_delete)
             return True
 
-    # Update existing blog 
+    # Update existing blog
     def update_blog(self, bid, new_bid, name,url,email):
         if not self.logged_in:
             return False
@@ -92,7 +109,7 @@ class Controller:
             blog.email=email
             return True
         return False
-    
+        
     #List all blogs
     def list_blogs(self):
 
@@ -100,21 +117,20 @@ class Controller:
             return None
 
         return self.blogs
-    
 
-    # Set current blog 
+    # Set current blog
     def set_current_blog(self, bid):
         if not self.logged_in:
             return None
         self.current_blog = self.search_blog(bid)
 
-    # Choose current blog 
+    # Choose current blog
     def get_current_blog(self):
         if not self.logged_in:
             return None
         return self.current_blog
-    
-    # Unset current blog 
+
+    # Unset current blog
     def unset_current_blog(self):
         if not self.logged_in:
             return None
@@ -149,10 +165,10 @@ class Controller:
 
         if not self.logged_in:
           return None
-        
+
         if self.current_blog is None:
             return None
-        
+
         if not self.current_blog.posts:
             return []
 
@@ -166,7 +182,7 @@ class Controller:
             return False
         if self.current_blog is None:
             return False
-            
+
         post_to_delete = self.search_post(code)
 
         if post_to_delete is None:
@@ -182,12 +198,12 @@ class Controller:
 
         if self.current_blog is None:
             return None
-        
+
         if not self.blogs:
             return None
-        
+
         if not self.current_blog.posts:
             return []
-        
+
         return list(reversed(self.current_blog.posts))
 
