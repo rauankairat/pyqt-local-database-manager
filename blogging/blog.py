@@ -11,17 +11,26 @@ class Blog:
         self.posts=[]
         self.post_count=0
 
+    def __str__(self):
+        ''' converts the blog object to a string representation '''
+        return str(self.id) + "; " + self.name + "; " + self.url + "; " + self.email
+
     #Checks if two Blog objects are equal.
     def __eq__(self, blog):
         if blog == None:
             return False
         return self.id==blog.id and self.name==blog.name and self.url==blog.url and self.email==blog.email
     
+    def __repr__(self):
+        ''' converts the blog object to a string representation for debugging '''
+        return "Blog(%r, %r, %r, %r)" % (self.id, self.name, self.url, self.email)
+
+
     #Creates a new Post object and adds it to this blog's post list
-    def create_post(self,code,title,text):
-        post = Post(code,title,text)
-        self.posts.append(post)
+    def create_post(self,title,text):
         self.post_count+=1
+        post = Post(self.post_count,title,text)
+        self.posts.append(post)
         return post
 
     #Searches for a Post in this blog by its code
@@ -57,5 +66,39 @@ class Blog:
 
         updated_post.update(new_title, new_text)
         return True
+    
+    def delete_post(self, code):
+        ''' delete a post from the blog '''
+        post_to_delete_index = -1
+        # first, search the post by code
+        for i in range(len(self.posts)):
+            if self.posts[i].code == code:
+                post_to_delete_index = i
+                break
+        # post does not exist
+        if post_to_delete_index == -1:
+            return False
+        # post exists, delete post
+        self.posts.pop(post_to_delete_index)
+        return True
+
+    def list_posts(self):
+        ''' list all posts from the blog from the 
+            more recently added to the least recently added'''
+        # list existing posts
+        posts_list = []
+        for i in range(-1, -len(self.posts)-1, -1):
+            posts_list.append(self.posts[i])
+        return posts_list
+
+    def retrieve_posts(self, search_string):
+        ''' retrieve posts in the blog that satisfy a search string '''
+        # retrieve existing posts
+        retrieved_posts = []
+        for post in self.posts:
+            if search_string in post.title or search_string in post.text:
+                retrieved_posts.append(post)
+        return retrieved_posts
+
 
     
