@@ -2,16 +2,16 @@ import os
 import pickle
 from typing import List, Optional
 
-from configuration import Configuration
+from blogging.configuration import Configuration
 from blogging.post import Post
-from blogging.post_dao import PostDAO
+from blogging.dao.post_dao import PostDAO
 
 
 class PostDAOPickle(PostDAO):
   
 
-    def __init__(self, blog):
-        self.blog = blog      
+    def __init__(self):
+              
         self.posts = []      
 
 

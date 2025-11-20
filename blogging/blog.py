@@ -1,4 +1,5 @@
 from blogging.post import Post
+from blogging.dao.post_dao_pickle import PostDAOPickle
 import datetime
 
 class Blog:
@@ -7,7 +8,7 @@ class Blog:
         self.name=name
         self.url=url
         self.email=email
-        self.posts= []
+        self.posts= PostDAOPickle()
         self.post_count=0
 
     def __str__(self):

@@ -13,11 +13,6 @@ from blogging.configuration import Configuration
 
 class Controller:
     def __init__(self):
-       
-        # self.autosave = Configuration.autosave
-        # self.user_dao = user_dao
-        # self.user_blog = user_blog
-        # self.user_post = user_post 
 
         self.id = 0
         self.logged_in = False
