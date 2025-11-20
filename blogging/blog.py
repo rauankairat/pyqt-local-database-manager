@@ -3,7 +3,6 @@ import datetime
 
 class Blog:
     def __init__(self,bid,name,url,email):
-        
         self.id=bid
         self.name=name
         self.url=url

@@ -5,8 +5,9 @@ class Post:
         self.code = code
         self.title = title
         self.text = text
-        self.creation_time = datetime.datetime.now()
-        self.update_time = datetime.datetime.now()
+        now = datetime.datetime.now()
+        self.creation_time = now
+        self.update_time = now
 
     def update(self, title, text):
         self.title = title
