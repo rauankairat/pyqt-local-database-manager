@@ -6,7 +6,7 @@ class Post:
         self.title = title
         self.text = text
         self.creation = datetime.datetime.now()
-        self.update = datetime.datetime.now()
+        self.update_time = datetime.datetime.now()
 
     def update(self, title, text):
         self.title = title
