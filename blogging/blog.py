@@ -26,7 +26,7 @@ class Blog:
 
 
     #Creates a new Post object and adds it to this blog's post list
-    def create_post(self,title,text):
+    def create_post(self,code,title,text):
         self.post_count+=1
         post = Post(self.post_count,title,text)
         self.posts.append(post)
