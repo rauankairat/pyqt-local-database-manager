@@ -46,9 +46,9 @@ class Controller:
     #Create new blog
     def create_blog(self, bid, name,url,email):
         if self.search_blog(bid)!=None:
-            return None
+            raise IllegalOperationException
         if not self.logged_in:
-            return None
+            raise IllegalAccessException
         else:
             blog = Blog(bid,name,url,email)
             self.blogs.append(blog)
@@ -57,7 +57,7 @@ class Controller:
     #Search blog
     def search_blog(self, id):
         if not self.logged_in:
-            return None
+            raise IllegalAccessException
         for blog in self.blogs:
             if (blog.id == id):
                 return blog
@@ -66,7 +66,7 @@ class Controller:
     # Retrieve existing blogs
     def retrieve_blogs(self, name):
         if not self.logged_in:
-            return None
+            raise IllegalAccessException
 
         blog_list = []
 
@@ -115,32 +115,32 @@ class Controller:
     def list_blogs(self):
 
         if not self.logged_in:
-            return None
+            raise IllegalAccessException
 
         return self.blogs
 
     # Set current blog
     def set_current_blog(self, bid):
         if not self.logged_in:
-            return None
+            raise IllegalAccessException
         self.current_blog = self.search_blog(bid)
 
     # Choose current blog
     def get_current_blog(self):
         if not self.logged_in:
-            return None
+            raise IllegalAccessException
         return self.current_blog
 
     # Unset current blog
     def unset_current_blog(self):
         if not self.logged_in:
-            return None
+            raise IllegalAccessException
         self.current_blog=None
 
     #Create new post in the current blog
     def create_post(self, title, text):
         if not self.logged_in:
-            return None
+            raise IllegalAccessException
         if not self.current_blog:
             return None
         code = self.current_blog.post_count+1
@@ -149,7 +149,7 @@ class Controller:
     # Searches for post
     def search_post(self,code):
         if not self.logged_in:
-            return None
+            raise IllegalAccessException
         if not self.current_blog:
             return None
         post = self.current_blog.search_post(code)
@@ -195,7 +195,7 @@ class Controller:
     #List all posts from the current blog
     def list_posts(self):
         if not self.logged_in:
-            return None
+            raise IllegalAccessException
 
         if self.current_blog is None:
             return None
