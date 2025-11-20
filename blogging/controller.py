@@ -97,14 +97,14 @@ class Controller:
     # Update existing blog
     def update_blog(self, bid, new_bid, name,url,email):
         if not self.logged_in:
-            return False
+            raise IllegalAccessException
         if not self.blogs:
-            return False
+            raise IllegalOperationException
         if self.search_blog(new_bid)!=None and bid!=new_bid:
-            return False
+            raise IllegalOperationException
         blog = self.search_blog(bid)
         if blog == self.current_blog:
-            return False
+            raise IllegalOperationException
         if blog!=None:
             blog.id = new_bid
             blog.name = name
@@ -125,7 +125,10 @@ class Controller:
     def set_current_blog(self, bid):
         if not self.logged_in:
             raise IllegalAccessException
-        self.current_blog = self.search_blog(bid)
+        src = self.search_blog(bid)
+        if src == None:
+            raise IllegalOperationException
+        self.current_blog = src
 
     # Choose current blog
     def get_current_blog(self):
