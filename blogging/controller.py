@@ -79,15 +79,17 @@ class Controller:
     def delete_blog(self,id):
 
         if not self.logged_in:
-            return False
+            raise IllegalAccessException
+        if len(self.blogs) == 0:
+            raise IllegalOperationException
 
         blog_to_delete = self.search_blog(id)
 
         if blog_to_delete == self.current_blog:
-            return False
+            raise IllegalOperationException
 
         if blog_to_delete is None:
-            return False
+            raise IllegalOperationException
         else:
             self.blogs.remove(blog_to_delete)
             return True
