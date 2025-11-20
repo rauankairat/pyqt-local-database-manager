@@ -20,8 +20,7 @@ class Controller:
         with open(path, "r") as usersFile:
             for line in usersFile:
                 [name, password] = line.split(',')
-                self.users[name] = password
-        print(self.users)
+                self.users[name] = password.rstrip()
 
 
     # Log in
@@ -29,7 +28,9 @@ class Controller:
         if self.logged_in:
             raise DuplicateLoginException
         for user in self.users:
-            if user == name and self.users[user] == password:
+            # hashed is the password tried, in sha 256
+            hashed = hashlib.sha256(password.encode('utf-8')).hexdigest()
+            if user == name and hashed ==self.users[user] :
                 self.logged_in = True
                 return True
         raise InvalidLoginException
