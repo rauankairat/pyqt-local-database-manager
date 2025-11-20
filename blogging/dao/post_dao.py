@@ -1,5 +1,9 @@
 from abc import ABC, abstractmethod
+
+
 class PostDAO(ABC):
+
+    def __init__(self,blog)
     @abstractmethod
     def search_post(self, key):
         pass

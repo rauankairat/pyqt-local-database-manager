@@ -12,7 +12,7 @@ class Post:
     def update(self, title, text):
         self.title = title
         self.text = text
-        self.update_time = datetime.datetime.now()	
+        self.update_time = datetime.datetime.now()
 
     def __eq__(self, other):
         ''' checks whether this post is the same as other post '''

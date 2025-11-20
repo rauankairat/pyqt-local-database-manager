@@ -9,9 +9,16 @@ from blogging.exception.illegal_operation_exception import IllegalOperationExcep
 from blogging.exception.no_current_blog_exception import NoCurrentBlogException
 import hashlib
 import os
+from blogging.configuration import Configuration
 
 class Controller:
     def __init__(self):
+       
+        # self.autosave = Configuration.autosave
+        # self.user_dao = user_dao
+        # self.user_blog = user_blog
+        # self.user_post = user_post 
+
         self.id = 0
         self.logged_in = False
         self.blogs = BlogDAOJSON()
@@ -22,6 +29,8 @@ class Controller:
             for line in usersFile:
                 [name, password] = line.split(',')
                 self.users[name] = password.rstrip()
+
+      
 
 
     # Log in
@@ -194,4 +203,7 @@ class Controller:
             return []
 
         return list(reversed(self.current_blog.posts))
+
+   
+        
 

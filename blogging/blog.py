@@ -7,7 +7,7 @@ class Blog:
         self.name=name
         self.url=url
         self.email=email
-        self.posts=[]
+        self.posts= []
         self.post_count=0
 
     def __str__(self):
