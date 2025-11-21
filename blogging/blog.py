@@ -8,7 +8,7 @@ class Blog:
         self.name=name
         self.url=url
         self.email=email
-        self.posts= PostDAOPickle()
+        self.posts=PostDAOPickle()
         self.post_count=0
 
     def __str__(self):

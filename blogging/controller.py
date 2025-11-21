@@ -85,10 +85,7 @@ class Controller:
     def update_blog(self, bid, new_bid, name,url,email):
         if not self.logged_in:
             raise IllegalAccessException
-        if not self.blogs:
-            raise IllegalOperationException
-        if self.search_blog(new_bid)!=None and bid!=new_bid:
-            raise IllegalOperationException
+
         blog = self.search_blog(bid)
         if blog == self.current_blog:
             raise IllegalOperationException
