@@ -2,6 +2,9 @@ from abc import ABC, abstractmethod
 
 
 class PostDAO(ABC):
+
+    def __init__(self,blog):
+        self.blog = blog
     @abstractmethod
     def search_post(self, key):
         pass

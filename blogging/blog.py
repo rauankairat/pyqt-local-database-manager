@@ -8,7 +8,7 @@ class Blog:
         self.name=name
         self.url=url
         self.email=email
-        self.posts=PostDAOPickle()
+        self.posts= PostDAOPickle(self)
         self.post_count=0
 
     def __str__(self):
@@ -27,78 +27,44 @@ class Blog:
 
 
     #Creates a new Post object and adds it to this blog's post list
-    def create_post(self,code,title,text):
-        self.post_count+=1
-        post = Post(self.post_count,title,text)
-        self.posts.append(post)
-        return post
+    def create_post(self,title,text):
+        return self.posts.create_post(title, text)
 
     #Searches for a Post in this blog by its code
     def search_post(self, code):
-        for post in self.posts:
-            if (post.code == code):
-                return post
-        return None
+        return self.posts.search_post(code)
 
     # Retrieves all posts from this blog that contain the given text
     def retrieve(self,text):
-        post_list = []
-
-        for post in self.posts:
-
-            if (text in post.title) or (text in post.text):
-                post_list.append(post)
-
-        return post_list
+    
+        return self.posts.retrieve_posts(text)
 
     # Updates an existing post’s title and text, identified by its code
     def update_post(self, code, new_title, new_text):
         ''' update a post from the blog '''
-        updated_post = None
+    
+        return self.posts.update_post(code, new_title, new_text)
 
-        for post in self.posts:
-            if post.code == code:
-                updated_post = post
-                break
-
-        if not updated_post:
-            return False
-
-        updated_post.update(new_title, new_text)
-        return True
     
     def delete_post(self, code):
         ''' delete a post from the blog '''
-        post_to_delete_index = -1
-        # first, search the post by code
-        for i in range(len(self.posts)):
-            if self.posts[i].code == code:
-                post_to_delete_index = i
-                break
-        # post does not exist
-        if post_to_delete_index == -1:
-            return False
-        # post exists, delete post
-        self.posts.pop(post_to_delete_index)
-        return True
+        
+        return self.posts.delete_post(code)
 
     def list_posts(self):
         ''' list all posts from the blog from the 
             more recently added to the least recently added'''
         # list existing posts
-        posts_list = []
-        for i in range(-1, -len(self.posts)-1, -1):
-            posts_list.append(self.posts[i])
-        return posts_list
+      
+        return self.posts.list_posts()
+
+
 
     def retrieve_posts(self, search_string):
         ''' retrieve posts in the blog that satisfy a search string '''
         # retrieve existing posts
-        retrieved_posts = []
-        for post in self.posts:
-            if search_string in post.title or search_string in post.text:
-                retrieved_posts.append(post)
-        return retrieved_posts
+        
+        return self.posts.retrieve_posts(search_string)
 
 
     

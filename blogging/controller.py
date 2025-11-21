@@ -128,8 +128,7 @@ class Controller:
             raise IllegalAccessException
         if not self.current_blog:
             raise NoCurrentBlogException
-        code = self.current_blog.post_count+1
-        return self.current_blog.create_post(code,title,text)
+        return self.current_blog.create_post(title,text)
 
     # Searches for post
     def search_post(self,code):
@@ -157,9 +156,6 @@ class Controller:
         if self.current_blog is None:
             raise NoCurrentBlogException
 
-        if not self.current_blog.posts:
-            return []
-
         return self.current_blog.retrieve(text)
 
 
@@ -172,13 +168,7 @@ class Controller:
         if self.current_blog is None:
             raise NoCurrentBlogException
 
-        post_to_delete = self.search_post(code)
-
-        if post_to_delete is None:
-            return False
-        else:
-            self.current_blog.posts.remove(post_to_delete)
-            return True
+        return self.current_blog.delete_post(code)
 
     #List all posts from the current blog
     def list_posts(self):
@@ -188,13 +178,7 @@ class Controller:
         if self.current_blog is None:
             raise NoCurrentBlogException
 
-        if not self.blogs:
-            return None
-
-        if not self.current_blog.posts:
-            return []
-
-        return list(reversed(self.current_blog.posts))
+        return self.current_blog.list_posts()
 
    
         

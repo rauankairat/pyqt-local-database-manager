@@ -1,53 +1,64 @@
 import os
 import pickle
 from typing import List, Optional
+import time
 
 from blogging.configuration import Configuration
 from blogging.post import Post
 from blogging.dao.post_dao import PostDAO
 
-
 class PostDAOPickle(PostDAO):
-  
 
-    def __init__(self):
-        self.posts = []      
+    def __init__(self, blog):
+        super().__init__(blog)
+        self.posts = {}
 
+    def search_post(self, key):
+        return self.posts.get(key)
 
-    def search_post(self, key: int):
-        for p in self.posts:
-            if p.code == key:
-                return p
-        return None
+    def create_post(self, title, text):
+        
+        self.blog.post_count += 1
 
-    def create_post(self, post):
-        if post.id in self.posts:
+        code = self.blog.post_count
+
+        post = Post(code,title,text)
+
+        self.posts[code] = post
+        return post
+
+    def update_post(self,key, new_title, new_text):
+       
+        post = self.posts.get(key)
+        if not post:
             return False
-        self.posts[post.id] = post
+        
+        post.update(new_title, new_text)
         return True
 
-    def retrieve_posts(self, search_string):
-        return [p for p in self.posts.values()
-                if search_string.lower() in p.title.lower()
-                or search_string.lower() in p.text.lower()
-        ]
-
-    def update_post(self, key: int, new_title: str, new_text: str) -> bool:
-        post = self.search_post(key)
-        if post is None:
+    def delete_post(self, key):
+        if key not in self.posts:
             return False
-        post.title = new_title
-        post.text = new_text
-        self._save_to_file()
+        
+        del self.posts[key]
         return True
+    
+    def retrieve_posts(self,search_string):
+        results = []
 
-    def delete_post(self, key: int) -> bool:
-        post = self.search_post(key)
-        if post is None:
-            return False
-        self.posts.remove(post)
-        self._save_to_file()
-        return True
+        for post in self.posts.values():
+            if search_string in post.title or search_string in post.text:
+                results.append(post)
+        
+        return results
 
     def list_posts(self):
-        return list(self.posts)
+
+        all_posts = list(self.posts.values())
+
+        all_posts.sort(key=lambda p: p.code, reverse=True)
+
+        return all_posts
+
+
+        
