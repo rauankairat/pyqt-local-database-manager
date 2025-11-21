@@ -1,6 +1,5 @@
 from abc import ABC, abstractmethod
 
-
 class PostDAO(ABC):
 
     def __init__(self,blog):
