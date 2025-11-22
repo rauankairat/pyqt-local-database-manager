@@ -25,9 +25,6 @@ class Controller:
                 [name, password] = line.split(',')
                 self.users[name] = password.rstrip()
 
-      
-
-
     # Log in
     def login(self, name, password):
         if self.logged_in:
@@ -50,10 +47,10 @@ class Controller:
 
     #Create new blog
     def create_blog(self, bid, name,url,email):
-        if self.search_blog(bid)!=None:
-            raise IllegalOperationException
         if not self.logged_in:
             raise IllegalAccessException
+        if self.search_blog(bid)!=None:
+            raise IllegalOperationException
         else:
             return self.blogs.create_blog(Blog(bid,name,url,email))
 
@@ -85,14 +82,13 @@ class Controller:
     def update_blog(self, bid, new_bid, name,url,email):
         if not self.logged_in:
             raise IllegalAccessException
-
-        blog = self.search_blog(bid)
-        if blog == self.current_blog:
+        if self.current_blog!=None and self.current_blog.id == bid:
             raise IllegalOperationException
-        if blog!=None:
-            self.blogs.update_blog(bid, Blog(new_bid, name, url, email))
-            return True
-        return False
+        if not self.search_blog(bid):
+            raise IllegalOperationException
+
+        self.blogs.update_blog(bid, Blog(new_bid, name, url, email))
+        return True
 
         
     #List all blogs

@@ -13,13 +13,18 @@ import json
 
 class BlogDAOJSON(BlogDAO):
     def __init__(self):
-        self.autosave = Configuration().autosave 
+        config = Configuration()
+        self.autosave = config.autosave 
         self.blogs=[]
         if self.autosave:
-            path = os.path.join(os.path.dirname(__file__), "./../records/blogs.json")
-            with open(path) as file:
-                self.blogs = json.load(file, cls=BlogDecoder)
-
+            try:
+                with open(config.blogs_file, "r") as file:
+                    self.blogs = json.load(file, cls=BlogDecoder)
+                if self.blogs is None:
+                    self.blogs = []
+            except: 
+                self.blogs=[]
+    
     def search_blog(self, key):
         for blog in self.blogs:
             if (blog.id == key):
@@ -62,6 +67,5 @@ class BlogDAOJSON(BlogDAO):
 
     def save_blogs(self):
         if self.autosave:
-            path = os.path.join(os.path.dirname(__file__), "./../records/blogs.json")
-            with open(path, "w") as file:
-                self.blogs = json.dump(self.blogs, file, cls=BlogEncoder)
+            with open(Configuration().blogs_file, "w") as file:
+                json.dump(self.blogs, file, cls=BlogEncoder)
