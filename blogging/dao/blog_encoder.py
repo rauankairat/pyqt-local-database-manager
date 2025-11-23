@@ -2,6 +2,7 @@ import json
 from blogging.blog import Blog
 
 class BlogEncoder(json.JSONEncoder):
+    '''JSON encoder class for Blog class'''
     def default(self, blog):
         if isinstance(blog, Blog):
             return {'id':blog.id,

@@ -48,6 +48,8 @@ class BlogDAOJSON(BlogDAO):
             raise IllegalOperationException
         if self.search_blog(newBlog.id)!=None and bid!=newBlog.id:
             raise IllegalOperationException
+        if not self.search_blog(bid):
+            raise IllegalOperationException
         blog = self.search_blog(bid)
         blog.id=newBlog.id
         blog.name=newBlog.name
