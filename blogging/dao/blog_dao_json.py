@@ -26,17 +26,20 @@ class BlogDAOJSON(BlogDAO):
                 self.blogs=[]
     
     def search_blog(self, key):
+        """searches for blogs"""
         for blog in self.blogs:
             if (blog.id == key):
                 return blog
         return None
 
     def create_blog(self, blog):
+        """creates and appends a blog"""
         self.blogs.append(blog)
         self.save_blogs()
         return blog
 
     def retrieve_blogs(self, search_str):
+        """retrieves the blogs"""
         blog_list = []
         for blog in self.blogs:
             if search_str in blog.name:
@@ -44,6 +47,7 @@ class BlogDAOJSON(BlogDAO):
         return blog_list
 
     def update_blog(self, bid, newBlog):
+        """updates a blog given its id and a new blog"""
         if not self.blogs:
             raise IllegalOperationException
         if self.search_blog(newBlog.id)!=None and bid!=newBlog.id:
@@ -59,15 +63,18 @@ class BlogDAOJSON(BlogDAO):
         return True
 
     def delete_blog(self, key):
+        """deletes a blog"""
         blog_to_delete = self.search_blog(key)
         self.blogs.remove(blog_to_delete)
         self.save_blogs()
         return True
 
     def list_blogs(self):
+        """lists blogs"""
         return self.blogs
 
     def save_blogs(self):
+        """helper function to save the current state of blogs into blogs.json"""
         if self.autosave:
             with open(Configuration().blogs_file, "w") as file:
                 json.dump(self.blogs, file, cls=BlogEncoder)
