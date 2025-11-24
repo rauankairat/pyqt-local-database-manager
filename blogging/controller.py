@@ -19,6 +19,7 @@ class Controller:
         self.blogs = BlogDAOJSON()
         self.current_blog = None
         self.users = {}
+        #get users from file
         path = os.path.join(os.path.dirname(__file__), "users.txt")
         with open(path, "r") as usersFile:
             for line in usersFile:
