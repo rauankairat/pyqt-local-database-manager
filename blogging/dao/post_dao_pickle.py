@@ -13,6 +13,37 @@ class PostDAOPickle(PostDAO):
         super().__init__(blog)
         self.posts = {}
 
+        # read autosave setting from Configuration
+        self.autosave = Configuration.autosave
+
+        # build path to records directory: blogging/records/<blog_id>.dat
+        records_dir = os.path.join(os.path.dirname(__file__), "..", "records")
+        records_dir = os.path.normpath(records_dir)
+        os.makedirs(records_dir, exist_ok=True)
+
+        self.file_path = os.path.join(records_dir, f"{self.blog.id}.dat")
+
+        if self.autosave and os.path.exists(self.file_path):
+            with open(self.file_path, "rb") as f:
+                try:
+                    loaded = pickle.load(f)
+
+                    # normalize to dict: {code: Post}
+                    if isinstance(loaded, dict):
+                        self.posts = loaded
+                    else:
+                        # list of Post objects
+                        self.posts = {post.code: post for post in loaded}
+
+                    # update counter
+                    if self.posts:
+                        self.blog.post_count = max(self.posts.keys())
+
+                except Exception:
+                    # corrupt or empty file → start clean
+                    self.posts = {}
+                    self.blog.post_count = 0
+
     def search_post(self, key):
         return self.posts.get(key)
 
@@ -25,6 +56,7 @@ class PostDAOPickle(PostDAO):
         post = Post(code,title,text)
 
         self.posts[code] = post
+        self._save()
         return post
 
     def update_post(self,key, new_title, new_text):
@@ -34,6 +66,7 @@ class PostDAOPickle(PostDAO):
             return False
         
         post.update(new_title, new_text)
+        self._save()
         return True
 
     def delete_post(self, key):
@@ -41,6 +74,7 @@ class PostDAOPickle(PostDAO):
             return False
         
         del self.posts[key]
+        self._save()
         return True
     
     def retrieve_posts(self,search_string):
@@ -60,5 +94,12 @@ class PostDAOPickle(PostDAO):
 
         return all_posts
 
+    def _save(self):
+        if not self.autosave:
+            return
+
+        # always save as dict {code: Post}
+        with open(self.file_path, "wb") as f:
+            pickle.dump(self.posts, f)
 
         

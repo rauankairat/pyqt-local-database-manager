@@ -132,12 +132,12 @@ class Controller:
         return post
 
     #Updates post
-    def update_post(self,code,title,text):
+    def update_post(self, code, title, text):
         if not self.logged_in:
             raise IllegalAccessException
         if not self.current_blog:
             raise NoCurrentBlogException
-        return self.current_blog.update_post(code,title,text)
+        return self.current_blog.update_post(code, title, text)
 
     #Retrieve existing posts from the current blog
     def retrieve_posts(self, text):

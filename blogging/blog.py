@@ -8,8 +8,9 @@ class Blog:
         self.name=name
         self.url=url
         self.email=email
-        self.posts= PostDAOPickle(self)
         self.post_count=0
+        self.posts= PostDAOPickle(self)
+      
 
     def __str__(self):
         ''' converts the blog object to a string representation '''
@@ -40,10 +41,10 @@ class Blog:
         return self.posts.retrieve_posts(text)
 
     # Updates an existing post’s title and text, identified by its code
-    def update_post(self, code, new_title, new_text):
+    def update_post(self, code, title, text):
         ''' update a post from the blog '''
     
-        return self.posts.update_post(code, new_title, new_text)
+        return self.posts.update_post(code, title, text)
 
     
     def delete_post(self, code):
