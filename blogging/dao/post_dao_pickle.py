@@ -8,6 +8,10 @@ from blogging.post import Post
 from blogging.dao.post_dao import PostDAO
 
 class PostDAOPickle(PostDAO):
+    """
+    DAO implementation that stores and retrieves a blog’s posts using pickle.
+    Posts for each blog are kept in a separate .dat file under blogging/records/.
+    """
 
     def __init__(self, blog):
         super().__init__(blog)
@@ -16,7 +20,7 @@ class PostDAOPickle(PostDAO):
         # read autosave setting from Configuration
         self.autosave = Configuration.autosave
 
-        # build path to records directory: blogging/records/<blog_id>.dat
+        
         records_dir = os.path.join(os.path.dirname(__file__), "..", "records")
         records_dir = os.path.normpath(records_dir)
         os.makedirs(records_dir, exist_ok=True)
@@ -28,26 +32,31 @@ class PostDAOPickle(PostDAO):
                 try:
                     loaded = pickle.load(f)
 
-                    # normalize to dict: {code: Post}
+                   
                     if isinstance(loaded, dict):
                         self.posts = loaded
                     else:
-                        # list of Post objects
+                        
                         self.posts = {post.code: post for post in loaded}
 
-                    # update counter
+                    
                     if self.posts:
                         self.blog.post_count = max(self.posts.keys())
 
                 except Exception:
-                    # corrupt or empty file → start clean
+                    
                     self.posts = {}
                     self.blog.post_count = 0
 
     def search_post(self, key):
+        """Return a post by its code, or None if it does not exist."""
         return self.posts.get(key)
 
     def create_post(self, title, text):
+        """
+        Create a new Post object, assign next post code,
+        store it in dictionary, and save to file if autosave.
+        """
         
         self.blog.post_count += 1
 
@@ -60,6 +69,10 @@ class PostDAOPickle(PostDAO):
         return post
 
     def update_post(self,key, new_title, new_text):
+        """
+        Update the title and text of an existing post.
+        Return False if the post does not exist.
+        """
        
         post = self.posts.get(key)
         if not post:
@@ -70,6 +83,9 @@ class PostDAOPickle(PostDAO):
         return True
 
     def delete_post(self, key):
+        """
+        Delete a post by code. Return False if the post does not exist.
+        """
         if key not in self.posts:
             return False
         
@@ -78,6 +94,9 @@ class PostDAOPickle(PostDAO):
         return True
     
     def retrieve_posts(self,search_string):
+        """
+        Retrieve all posts whose title or text contains the search string.
+        """
         results = []
 
         for post in self.posts.values():
@@ -87,6 +106,10 @@ class PostDAOPickle(PostDAO):
         return results
 
     def list_posts(self):
+        """
+        Return all posts sorted by code in descending order:
+        newest posts first.
+        """
 
         all_posts = list(self.posts.values())
 
@@ -95,6 +118,10 @@ class PostDAOPickle(PostDAO):
         return all_posts
 
     def _save(self):
+        """
+        Save all posts to the blog's .dat file using pickle,
+        if autosave is enabled.(helper func)
+        """
         if not self.autosave:
             return
 
