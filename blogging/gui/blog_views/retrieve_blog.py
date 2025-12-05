@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QWidget, QLabel, QLineEdit, QPushButton, QMessageBox
+from PyQt6.QtWidgets import QWidget, QLabel, QLineEdit, QPushButton, QMessageBox, QTableView
 from PyQt6.QtWidgets import QGridLayout
 from blogging.configuration import Configuration
 from blogging.controller import Controller
@@ -14,21 +14,18 @@ class retrieveBlog(QWidget):
 
         layout = QGridLayout()
 
-        label_id = QLabel("ID")
-        self.text_id = QLineEdit()
+        query_label = QLabel('query:')
+        self.query = QLineEdit()
         self.back_btn = QPushButton("back")
         self.retrieve_btn = QPushButton("retrieve")
 
-        label_name = QLabel("name:")
-        label_url = QLabel("url:")
-        label_email = QLabel("email:")
-        label_post_count = QLabel("post count:")
+        self.table = QTableView()
 
-        self.name_line = QLineEdit("")
-        self.url_line = QLineEdit("")
-        self.email_line = QLineEdit("")
-        self.post_count_line = QLineEdit("")
-
+        layout.addWidget(query_label, 0,0)
+        layout.addWidget(self.query,0,1)
+        layout.addWidget(self.back_btn, 1,0)
+        layout.addWidget(self.retrieve_btn, 1,1)
+        layout.addWidget(self.table, 2, 0, 1, 2)
 
         self.retrieve_btn.clicked.connect(self.retrieve)
         self.back_btn.clicked.connect(self.back)
@@ -37,14 +34,19 @@ class retrieveBlog(QWidget):
     
     def retrieve(self):
         cont = self.main_window.controller
+        qry = self.query.text()
 
         try:
-            pass
+            result = cont.retrieve_blogs(qry)
+        # self.id=bid
+        # self.name=name
+        # self.url=url
+        # self.email=email
+            
 
         except BaseException as e:
             msg = QMessageBox()
             msg.setText(e.__doc__)
-
             msg.exec()
     
     def back(self):

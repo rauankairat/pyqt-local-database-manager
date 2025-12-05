@@ -5,6 +5,7 @@ from .login import loginGui
 from .blog_menu import blogMenu
 from .blog_views.search_blog import searchBlog
 from .blog_views.create_blog import createBlog
+from .blog_views.retrieve_blog import retrieveBlog
 
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QApplication, QMainWindow, QStackedWidget
@@ -42,6 +43,7 @@ class BloggingGUI(QMainWindow):
         self.widget.addWidget(blogMenu(self))
         self.widget.addWidget(searchBlog(self))
         self.widget.addWidget(createBlog(self))
+        self.widget.addWidget(retrieveBlog(self))
         
         self.setCentralWidget(self.widget)
         self.switchGui("login")
