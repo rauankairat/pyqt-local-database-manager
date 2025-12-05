@@ -8,6 +8,7 @@ from .blog_views.create_blog import createBlog
 
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QApplication, QMainWindow, QStackedWidget
+from PyQt6.QtGui import QIcon
 
 class BloggingGUI(QMainWindow):
 
@@ -16,6 +17,7 @@ class BloggingGUI(QMainWindow):
         self.configuration = Configuration()
         self.configuration.__class__.autosave = True
         self.controller = Controller()
+        self.setWindowIcon(QIcon("uvic.png"))
 
         self.view_map = {
             "login": 0,
