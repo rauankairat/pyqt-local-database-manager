@@ -4,7 +4,7 @@ from blogging.configuration import Configuration
 from blogging.controller import Controller
 from .blog_table_view import BlogTableModel
 
-class retrieveBlog(QWidget):
+class listBlog(QWidget):
     def __init__(self, main_win):
         super().__init__()
         
@@ -15,30 +15,26 @@ class retrieveBlog(QWidget):
 
         layout = QGridLayout()
 
-        query_label = QLabel('query:')
-        self.query = QLineEdit()
         self.back_btn = QPushButton("back")
-        self.retrieve_btn = QPushButton("retrieve")
+        self.reload_btn = QPushButton("reload")
 
         self.table = QTableView()
 
-        layout.addWidget(query_label, 0,0)
-        layout.addWidget(self.query,0,1)
-        layout.addWidget(self.back_btn, 1,0)
-        layout.addWidget(self.retrieve_btn, 1,1)
-        layout.addWidget(self.table, 2, 0, 1, 2)
+        layout.addWidget(self.table, 0, 0)
+        layout.addWidget(self.reload_btn, 1,0)
+        layout.addWidget(self.back_btn, 2,0)
 
-        self.retrieve_btn.clicked.connect(self.retrieve)
+
+        self.reload_btn.clicked.connect(self.reload)
         self.back_btn.clicked.connect(self.back)
 
         self.setLayout(layout)
     
-    def retrieve(self):
+    def reload(self):
         cont = self.main_window.controller
-        qry = self.query.text()
 
         try:
-            result = cont.retrieve_blogs(qry)
+            result = cont.list_blogs()
             self.table.setModel(BlogTableModel(result))
         except BaseException as e:
             msg = QMessageBox()
