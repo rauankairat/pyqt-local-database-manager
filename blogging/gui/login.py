@@ -42,7 +42,7 @@ class loginGui(QWidget):
 
         try:
             controller.login(username, password)
-            self.main_window.switchGui("logged_in")
+            self.main_window.switchGui("blog_menu")
         except:
             msg = QMessageBox()
             msg.setText("Wrong username/password")

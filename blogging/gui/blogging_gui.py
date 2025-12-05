@@ -2,7 +2,10 @@ import sys
 from blogging.configuration import Configuration
 from blogging.controller import Controller
 from .login import loginGui
-from .logged_in import loggedInGui
+from .blog_menu import blogMenu
+from .blog_views.search_blog import searchBlog
+from .blog_views.create_blog import createBlog
+
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QApplication, QMainWindow, QStackedWidget
 
@@ -15,13 +18,30 @@ class BloggingGUI(QMainWindow):
         self.controller = Controller()
 
         self.view_map = {
-            "login" : 0,
-            "logged_in" : 1
+            "login": 0,
+
+            "blog_menu": 1,
+            "search_blogs": 2,
+            "create_blog": 3,
+            "retrieve_blogs": 4,
+            "update_blog": 5,
+            "delete_blog": 6,
+            "list_blogs": 7,
+            "choose_blog": 8,
+
+            "post_menu": 9,
+            "create_post": 10,
+            "retrieve_posts": 11,
+            "update_post": 12,
+            "delete_post": 13,
+            "list_posts": 14
         }
 
         self.widget= QStackedWidget()
         self.widget.addWidget(loginGui(self))
-        self.widget.addWidget(loggedInGui(self))
+        self.widget.addWidget(blogMenu(self))
+        self.widget.addWidget(searchBlog(self))
+        self.widget.addWidget(createBlog(self))
         
         self.setCentralWidget(self.widget)
         self.switchGui("login")
