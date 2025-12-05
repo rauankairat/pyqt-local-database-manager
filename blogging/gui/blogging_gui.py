@@ -8,6 +8,7 @@ from .blog_views.create_blog import createBlog
 from .blog_views.retrieve_blog import retrieveBlog
 from .blog_views.update_blog import updateBlog
 from .blog_views.delete_blog import deleteBlog
+from .blog_views.list_blog import listBlog
 
 
 
@@ -45,6 +46,7 @@ class BloggingGUI(QMainWindow):
         }
 
         self.widget= QStackedWidget()
+        
         self.widget.addWidget(loginGui(self))
         self.widget.addWidget(blogMenu(self))
         self.widget.addWidget(searchBlog(self))
@@ -52,6 +54,7 @@ class BloggingGUI(QMainWindow):
         self.widget.addWidget(retrieveBlog(self))
         self.widget.addWidget(updateBlog(self))
         self.widget.addWidget(deleteBlog(self))
+        self.widget.addWidget(listBlog(self))
 
 
         
