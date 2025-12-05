@@ -6,17 +6,20 @@ from .blog_menu import blogMenu
 from .blog_views.search_blog import searchBlog
 from .blog_views.create_blog import createBlog
 from .blog_views.retrieve_blog import retrieveBlog
-<<<<<<< HEAD
 from .blog_views.choose_blog import chooseBlog
 
 from .post_menu import postMenu
 from .post_views.create_post import createPost
-=======
+from .post_views.delete_post import deletePost
+# from .post_views.list_posts import listPosts
+from .post_views.update_post import updatePost
+from .post_views.retrieve_posts import retrievePosts
+
+
 from .blog_views.update_blog import updateBlog
 from .blog_views.delete_blog import deleteBlog
 from .blog_views.list_blog import listBlog
 
->>>>>>> refs/remotes/origin/main
 
 
 from PyQt6.QtCore import Qt
@@ -62,8 +65,12 @@ class BloggingGUI(QMainWindow):
         self.widget.addWidget(updateBlog(self))
         self.widget.addWidget(deleteBlog(self))
         self.widget.addWidget(listBlog(self))
-
-
+        self.widget.addWidget(chooseBlog(self)) 
+        self.widget.addWidget(postMenu(self))
+        self.widget.addWidget(createPost(self)) 
+        self.widget.addWidget(retrievePosts(self))
+        self.widget.addWidget(updateBlog(self))
+        self.widget.addWidget(deletePost(self))
         
         self.setCentralWidget(self.widget)
         self.switchGui("login")

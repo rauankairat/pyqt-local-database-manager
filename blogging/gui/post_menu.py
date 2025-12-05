@@ -3,6 +3,8 @@ from PyQt6.QtWidgets import QGridLayout
 from blogging.configuration import Configuration
 from blogging.controller import Controller
 
+
+
 class postMenu(QWidget):
     def __init__(self, main_win):
         super().__init__()
@@ -38,7 +40,7 @@ class postMenu(QWidget):
             lambda: self.main_window.switchGui("create_post")
         )
         self.button_retrieve.clicked.connect(
-            lambda: self.main_window.switchGui("retrieve_post")
+            lambda: self.main_window.switchGui("retrieve_posts")
         )
         self.button_update.clicked.connect(
             lambda: self.main_window.switchGui("update_post")
@@ -47,11 +49,11 @@ class postMenu(QWidget):
             lambda: self.main_window.switchGui("delete_post")
         )
         self.button_list.clicked.connect(
-            lambda: self.main_window.switchGui("list_post")
+            lambda: self.main_window.switchGui("list_posts")
         )
 
         self.button_back.clicked.connect(
-            lambda: self.main_window.switchGui("choose_post")
+            lambda: self.main_window.switchGui("choose_blog")
         )
        
         self.button_logout.clicked.connect(
