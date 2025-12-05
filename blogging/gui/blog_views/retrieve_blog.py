@@ -2,6 +2,7 @@ from PyQt6.QtWidgets import QWidget, QLabel, QLineEdit, QPushButton, QMessageBox
 from PyQt6.QtWidgets import QGridLayout
 from blogging.configuration import Configuration
 from blogging.controller import Controller
+from .blog_table_view import BlogTableModel
 
 class retrieveBlog(QWidget):
     def __init__(self, main_win):
@@ -38,11 +39,12 @@ class retrieveBlog(QWidget):
 
         try:
             result = cont.retrieve_blogs(qry)
+            self.table.setModel(BlogTableModel(result))
         # self.id=bid
         # self.name=name
         # self.url=url
         # self.email=email
-            
+
 
         except BaseException as e:
             msg = QMessageBox()

@@ -1,4 +1,9 @@
-class TableModel(QtCore.QAbstractTableModel):
+
+from PyQt6 import QtCore, QtGui, QtWidgets
+from PyQt6.QtCore import Qt
+
+
+class BlogTableModel(QtCore.QAbstractTableModel):
 
     def __init__(self, data):
         super().__init__()
@@ -6,9 +11,6 @@ class TableModel(QtCore.QAbstractTableModel):
 
     def data(self, index, role):
         if role == Qt.ItemDataRole.DisplayRole:
-            # See below for the nested-list data structure.
-            # .row() indexes into the outer list,
-            # .column() indexes into the sub-list
             if index.column()==0:
                 return self._data[index.row()].id
             elif index.column()==1:
