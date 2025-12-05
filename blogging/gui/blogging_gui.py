@@ -7,6 +7,8 @@ from .blog_views.search_blog import searchBlog
 from .blog_views.create_blog import createBlog
 from .blog_views.retrieve_blog import retrieveBlog
 from .blog_views.update_blog import updateBlog
+from .blog_views.delete_blog import deleteBlog
+
 
 
 from PyQt6.QtCore import Qt
@@ -49,6 +51,8 @@ class BloggingGUI(QMainWindow):
         self.widget.addWidget(createBlog(self))
         self.widget.addWidget(retrieveBlog(self))
         self.widget.addWidget(updateBlog(self))
+        self.widget.addWidget(deleteBlog(self))
+
 
         
         self.setCentralWidget(self.widget)

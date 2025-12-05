@@ -64,7 +64,7 @@ class updateBlog(QWidget):
 
         cont = self.main_window.controller
 
-        result = cont.search_blog(id)
+        result = cont.search_blog(int(id))
 
         if result != None:
             self.id_line.setText(str(result.id))
@@ -85,17 +85,15 @@ class updateBlog(QWidget):
 
         cont = self.main_window.controller
 
-        # try:
-        cont.update_blog(self.prev_id.text(), int(id),name,url,email)
-        msg = QMessageBox()
-        msg.setText("successfully updated blog")
-
-        msg.exec()
-        # except BaseException as e:
-        #     msg = QMessageBox()
-        #     msg.setText(e.__doc__)
-
-        #     msg.exec()
+        try:
+            cont.update_blog(int(self.prev_id.text()), int(id),name,url,email)
+            msg = QMessageBox()
+            msg.setText("successfully updated blog")
+            msg.exec()
+        except BaseException as e:
+            msg = QMessageBox()
+            msg.setText(e.__doc__)
+            msg.exec()
     
     def back(self):
         self.main_window.switchGui("blog_menu")
