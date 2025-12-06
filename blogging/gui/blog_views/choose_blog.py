@@ -39,22 +39,24 @@ class chooseBlog(QWidget):
         self.setLayout(layout)
     
     def search(self):
-        id = self.text_id.text()
-
+        id = self.text_id.text().strip()
         cont = self.main_window.controller
 
-        result = cont.search_blog(id)
+        try:
+            result = cont.search_blog(id)
 
-        if result != None:
+            if result is not None:
+                cont.set_current_blog(id) 
+                self.main_window.switchGui("post_menu")
 
-            cont.current_blog = result   
-            self.main_window.switchGui("post_menu")
-            
-            
-        else:
+            else:
+                msg = QMessageBox()
+                msg.setText("Not found")
+                msg.exec()
+
+        except Exception as e:
             msg = QMessageBox()
-            msg.setText("Not found")
-
+            msg.setText(str(e))
             msg.exec()
     
     def back(self):

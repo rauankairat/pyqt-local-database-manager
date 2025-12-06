@@ -13,3 +13,13 @@ class deletePost(QWidget):
         self.main_window=main_win
 
         layout = QGridLayout()
+
+        self.button_back = QPushButton("Back")
+
+        layout.addWidget(self.button_back,       3, 0)
+
+        self.button_back.clicked.connect(
+            lambda: self.main_window.switchGui("post_menu")
+        )
+
+        self.setLayout(layout)

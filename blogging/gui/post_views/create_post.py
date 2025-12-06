@@ -36,7 +36,6 @@ class createPost(QWidget):
         layout.addWidget(self.tittle_edit,   1, 1)
 
         layout.addWidget(label_text,         2, 0)
-        
         layout.addWidget(self.text_edit,    2, 1)
 
         layout.addWidget(self.button_back,       3, 0)
@@ -61,7 +60,7 @@ class createPost(QWidget):
         cont = self.main_window.controller
 
         try:
-            result = cont.create_post(tittle,text,)
+            result = cont.create_post(tittle,text)
             msg = QMessageBox()
             msg.setText("Successfully created post")
 
