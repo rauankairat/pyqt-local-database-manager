@@ -4,6 +4,7 @@ from blogging.configuration import Configuration
 from blogging.controller import Controller
 
 class createBlog(QWidget):
+    '''view to create blog'''
     def __init__(self, main_win):
         super().__init__()
         
@@ -48,6 +49,7 @@ class createBlog(QWidget):
         self.setLayout(layout)
     
     def create(self):
+        '''delegates to controller.create_blog()'''
         id = self.id_edit.text()
         name = self.name_edit.text()
         url = self.url_edit.text()

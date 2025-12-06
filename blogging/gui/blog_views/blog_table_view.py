@@ -4,7 +4,7 @@ from PyQt6.QtCore import Qt
 
 
 class BlogTableModel(QtCore.QAbstractTableModel):
-
+    '''model of blogs for QTableView'''
     def __init__(self, data):
         super().__init__()
         self._data = data
