@@ -78,6 +78,7 @@ class updateBlog(QWidget):
             msg.exec()
 
     def update(self):
+        ''' delegates to controllers'''
         id = self.id_line.text()
         name = self.name_line.text()
         url = self.url_line.text()

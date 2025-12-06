@@ -5,6 +5,7 @@ from blogging.controller import Controller
 from .blog_table_view import BlogTableModel
 
 class listBlog(QWidget):
+    '''lists the blogs in a view'''
     def __init__(self, main_win):
         super().__init__()
         
@@ -31,6 +32,7 @@ class listBlog(QWidget):
         self.setLayout(layout)
     
     def reload(self):
+        ''' since the stack wouldnt update the component on switching the view, i added a reload button instead'''
         cont = self.main_window.controller
 
         try:

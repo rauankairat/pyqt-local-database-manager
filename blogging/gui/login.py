@@ -4,6 +4,7 @@ from blogging.configuration import Configuration
 from blogging.controller import Controller
 
 class loginGui(QWidget):
+    ''' the login gui'''
     def __init__(self, main_win):
         super().__init__()
         
@@ -35,6 +36,7 @@ class loginGui(QWidget):
         self.button_quit.clicked.connect(self.quit_pressed)
 
     def login_pressed(self):
+        '''gets data from the '''
         username = self.text_username.text()
         password = self.text_password.text()
 
@@ -53,4 +55,5 @@ class loginGui(QWidget):
             self.text_password.setText('')
     
     def quit_pressed(self):
+        '''close the application'''
         QApplication.instance().quit()

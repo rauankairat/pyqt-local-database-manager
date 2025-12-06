@@ -4,6 +4,13 @@ from blogging.configuration import Configuration
 from blogging.controller import Controller
 
 class blogMenu(QWidget):
+    '''
+    main view shown after the login view.
+    all views accessed by this menu have the same structure:
+    - a class containing the views with the widgets in the __init__
+    - one or two functions to get the data from to widgets and call the controller methods with them
+    - a back function to return to this menu
+    '''
     def __init__(self, main_win):
         super().__init__()
         
@@ -23,6 +30,7 @@ class blogMenu(QWidget):
         self.button_choose = QPushButton("Choose Blog")
         self.button_logout = QPushButton("Log out")
 
+        # add widgets to the layout
         layout.addWidget(self.button_search,   0, 0)
         layout.addWidget(self.button_create,   1, 0)
         layout.addWidget(self.button_retrieve, 2, 0)
@@ -32,6 +40,7 @@ class blogMenu(QWidget):
         layout.addWidget(self.button_choose,   6, 0)
         layout.addWidget(self.button_logout,   7, 0)
 
+        # connect the buttons to a switchGui call
         self.button_search.clicked.connect(
             lambda: self.main_window.switchGui("search_blogs")
         )

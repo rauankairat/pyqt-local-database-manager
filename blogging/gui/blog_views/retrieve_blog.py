@@ -5,6 +5,7 @@ from blogging.controller import Controller
 from .blog_table_view import BlogTableModel
 
 class retrieveBlog(QWidget):
+    ''' retrieve view for the blogs'''
     def __init__(self, main_win):
         super().__init__()
         
@@ -34,6 +35,7 @@ class retrieveBlog(QWidget):
         self.setLayout(layout)
     
     def retrieve(self):
+        ''' delegates to controller.retrieve_blog()'''
         cont = self.main_window.controller
         qry = self.query.text()
 

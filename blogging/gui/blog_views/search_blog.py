@@ -4,6 +4,7 @@ from blogging.configuration import Configuration
 from blogging.controller import Controller
 
 class searchBlog(QWidget):
+    ''' search blog view '''
     def __init__(self, main_win):
         super().__init__()
         
@@ -53,6 +54,7 @@ class searchBlog(QWidget):
         self.setLayout(layout)
     
     def search(self):
+        '''delegates to search_blog'''
         id = self.text_id.text()
 
         cont = self.main_window.controller

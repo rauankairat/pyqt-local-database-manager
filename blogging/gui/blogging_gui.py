@@ -35,6 +35,7 @@ class BloggingGUI(QMainWindow):
         self.controller = Controller()
         self.setWindowIcon(QIcon("uvic.png"))
 
+        # a dictionary to not use magic numbers for the stack
         self.view_map = {
             "login": 0,
 
@@ -57,23 +58,25 @@ class BloggingGUI(QMainWindow):
 
         self.widget= QStackedWidget()
         
-        self.widget.addWidget(loginGui(self)) #1
-        self.widget.addWidget(blogMenu(self)) #2
-        self.widget.addWidget(searchBlog(self)) #3
-        self.widget.addWidget(createBlog(self)) #4
-        self.widget.addWidget(retrieveBlog(self)) #5
-        self.widget.addWidget(updateBlog(self)) #6
-        self.widget.addWidget(deleteBlog(self)) #7
-        self.widget.addWidget(listBlog(self)) #8
-        self.widget.addWidget(chooseBlog(self)) #9
-        self.widget.addWidget(postMenu(self))#10
-        self.widget.addWidget(createPost(self))  #11
-        self.widget.addWidget(retrievePosts(self)) #12
-        self.widget.addWidget(updatePost(self)) #13
-        self.widget.addWidget(deletePost(self)) #14
-        self.widget.addWidget(listPosts(self)) #15
+        # these need to be in order to match the dict above
+        self.widget.addWidget(loginGui(self)) #0
+        self.widget.addWidget(blogMenu(self)) #1
+        self.widget.addWidget(searchBlog(self)) #2
+        self.widget.addWidget(createBlog(self)) #3
+        self.widget.addWidget(retrieveBlog(self)) #4
+        self.widget.addWidget(updateBlog(self)) #5
+        self.widget.addWidget(deleteBlog(self)) #6
+        self.widget.addWidget(listBlog(self)) #7
+        self.widget.addWidget(chooseBlog(self)) #8
+        self.widget.addWidget(postMenu(self)) #9
+        self.widget.addWidget(createPost(self)) #10
+        self.widget.addWidget(retrievePosts(self)) #11
+        self.widget.addWidget(updatePost(self)) #12
+        self.widget.addWidget(deletePost(self)) #13
+        self.widget.addWidget(listPosts(self)) #14
         
         self.setCentralWidget(self.widget)
+        #login is the first view
         self.switchGui("login")
     
     def switchGui(self, index):

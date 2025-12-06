@@ -4,6 +4,7 @@ from blogging.configuration import Configuration
 from blogging.controller import Controller
 
 class deleteBlog(QWidget):
+    ''' view for deleting a blog with a search function first  '''
     def __init__(self, main_win):
         super().__init__()
         
@@ -60,6 +61,7 @@ class deleteBlog(QWidget):
         self.setLayout(layout)
     
     def search(self):
+        '''delegates to controller.search'''
         id = self.prev_id.text()
 
         cont = self.main_window.controller
@@ -78,7 +80,7 @@ class deleteBlog(QWidget):
             msg.exec()
 
     def delete(self):
-
+        '''delegates to the controllers delete and shows a pop-up based on the result'''
         cont = self.main_window.controller
 
         try:
