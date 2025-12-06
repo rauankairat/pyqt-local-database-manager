@@ -15,7 +15,7 @@ class retrievePosts(QWidget):
 
         layout = QGridLayout()
 
-        tittle_label = QLabel('Tittle:')
+        tittle_label = QLabel('Tittle or Text:')
         self.tittle = QLineEdit()
         self.back_btn = QPushButton("back")
         self.retrieve_btn = QPushButton("retrieve")
@@ -39,7 +39,7 @@ class retrievePosts(QWidget):
         tittle = self.tittle.text()
 
         try:
-            result = cont.list_posts()
+            result = cont.retrieve_posts(tittle)
             self.table.setModel(PostTableModel(result))
         except BaseException as e:
             msg = QMessageBox()

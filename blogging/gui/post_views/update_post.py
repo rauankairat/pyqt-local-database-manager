@@ -1,7 +1,6 @@
 from PyQt6.QtWidgets import QWidget, QLabel, QLineEdit, QPushButton, QMessageBox
 from PyQt6.QtWidgets import QGridLayout
 from blogging.configuration import Configuration
-from blogging.controller import Controller
 
 class updatePost(QWidget):
     def __init__(self, main_win):
@@ -10,61 +9,63 @@ class updatePost(QWidget):
         self.configuration = Configuration()
         self.configuration.__class__.autosave = True
         
-        self.main_window=main_win
+        self.main_window = main_win
 
         layout = QGridLayout()
 
         self.button_back = QPushButton("Back")
         self.button_update = QPushButton("Update")
+        self.button_search = QPushButton("Search")
 
-        label_code = QLabel("code:")
-        label_tittle = QLabel("Tittle:")
-        label_text = QLabel("Text:")
-
-
+        label_code = QLabel("Code:")
         self.code_edit = QLineEdit("")
-        self.tittle_edit = QLineEdit("")
-        self.text_edit = QLineEdit("")
 
+        label_new_title = QLabel("New Title:")
+        label_new_text = QLabel("New Text:")
 
-        layout.addWidget(label_code,     0, 0)
-        layout.addWidget(self.code_edit,    0, 1)
+        self.new_tittle_edit = QLineEdit("")
+        self.new_text_edit = QLineEdit("")
 
-        layout.addWidget(label_tittle,        1, 0)
-        layout.addWidget(self.tittle_edit,   1, 1)
+        layout.addWidget(label_code, 0, 0)
+        layout.addWidget(self.code_edit, 0, 1)
+        layout.addWidget(self.button_search, 1, 1)
 
-        layout.addWidget(label_text,         2, 0)
-        layout.addWidget(self.text_edit,    2, 1)
+        layout.addWidget(label_new_title, 3, 0)
+        layout.addWidget(self.new_tittle_edit, 3, 1)
 
-        layout.addWidget(self.button_back,    3, 0)
-        layout.addWidget(self.button_update,    3, 1)
+        layout.addWidget(label_new_text, 4, 0)
+        layout.addWidget(self.new_text_edit, 4, 1)
 
+        layout.addWidget(self.button_back, 5, 0)
+        layout.addWidget(self.button_update, 5, 1)
 
-        self.button_back.clicked.connect(
-            lambda: self.main_window.switchGui("post_menu")
-        )
-
+        self.button_search.clicked.connect(self.search)
+        self.button_back.clicked.connect(lambda: self.main_window.switchGui("post_menu"))
         self.button_update.clicked.connect(self.update)
 
         self.setLayout(layout)
 
-    def update(self):
-        code = self.code_edit.text()
-        tittle = self.tittle_edit.text()
-        text = self.text_edit.text()
-        
+    def search(self):
+        code = int(self.code_edit.text())
         cont = self.main_window.controller
-        
+
+        result = cont.search_post(code)
+
+        if result is not None:
+            self.new_tittle_edit.setText(result.title)
+            self.new_text_edit.setText(result.text)
+        else:
+            QMessageBox.warning(self, "Error", "Post not found")
+
+    def update(self):
+        code = int(self.code_edit.text())
+        tittle = self.new_tittle_edit.text()
+        text = self.new_text_edit.text()
+
+        cont = self.main_window.controller
+
         try:
-            
-
-            result = cont.update_post(code,tittle,text)
-            msg = QMessageBox()
-            msg.setText("Successfully created post")
-
-            msg.exec()
-        
+            cont.update_post(code, tittle, text)
+            QMessageBox.information(self, "Success", "Successfully updated post")
         except BaseException as e:
-            msg = QMessageBox()
-            msg.setText(str(e))
-            msg.exec()
+            QMessageBox.warning(self, "Error", str(e))
