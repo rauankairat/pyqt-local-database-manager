@@ -4,6 +4,9 @@ from blogging.configuration import Configuration
 
 class updatePost(QWidget):
     def __init__(self, main_win):
+        """
+            Update post by searching by its code and changing text and tittle in curent blog.
+        """
         super().__init__()
         
         self.configuration = Configuration()

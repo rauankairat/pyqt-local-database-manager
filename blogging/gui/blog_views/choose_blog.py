@@ -6,6 +6,7 @@ from blogging.controller import Controller
 from ..post_menu import postMenu
 
 class chooseBlog(QWidget):
+    ''' Sets the current blog by its id'''
     def __init__(self, main_win):
         super().__init__()
 

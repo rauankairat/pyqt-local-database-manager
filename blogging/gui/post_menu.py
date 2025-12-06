@@ -7,6 +7,9 @@ from blogging.controller import Controller
 
 class postMenu(QWidget):
     def __init__(self, main_win):
+        """
+            Post menu for options to do with posts in curent blog
+        """
         super().__init__()
         
         self.configuration = Configuration()

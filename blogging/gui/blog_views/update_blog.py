@@ -4,6 +4,7 @@ from blogging.configuration import Configuration
 from blogging.controller import Controller
 
 class updateBlog(QWidget):
+    '''Updates blog by searching the id and changing information'''
     def __init__(self, main_win):
         super().__init__()
         

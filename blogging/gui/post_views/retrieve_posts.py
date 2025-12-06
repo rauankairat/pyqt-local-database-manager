@@ -5,6 +5,9 @@ from blogging.controller import Controller
 from .post_table_view import PostTableModel
 
 class retrievePosts(QWidget):
+    """
+        List all blogs containg typed tittle or text in current blog 
+    """
     def __init__(self, main_win):
         super().__init__()
         

@@ -4,6 +4,10 @@ from PyQt6.QtCore import Qt
 class PostTableModel(QtCore.QAbstractTableModel):
 
     def __init__(self, data):
+        """
+        Table for list posts and retrive posts
+        """
+        
         super().__init__()
         self._data = data  # list of Post objects
 

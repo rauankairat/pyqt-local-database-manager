@@ -5,6 +5,9 @@ from blogging.controller import Controller
 
 class deletePost(QWidget):
     def __init__(self, main_win):
+        """
+        Delete the post from current blog by typing the code of post
+        """
         super().__init__()
         
         self.configuration = Configuration()

@@ -21,8 +21,19 @@ class BlogTableModel(QtCore.QAbstractTableModel):
                 return self._data[index.row()].email
 
     def rowCount(self, index):
-        # The length of the outer list.
+
         return len(self._data)
 
     def columnCount(self, index):
         return 4
+    
+    def headerData(self, section, orientation, role):
+        if role == Qt.ItemDataRole.DisplayRole and orientation == Qt.Orientation.Horizontal:
+            if section == 0:
+                return "Id"
+            elif section == 1:
+                return "Name"
+            elif section == 2:
+                return "url"
+            elif section == 3:
+                return "email"

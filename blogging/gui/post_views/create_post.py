@@ -5,6 +5,10 @@ from blogging.configuration import Configuration
 from blogging.controller import Controller
 
 class createPost(QWidget):
+    """
+     Create post by typing tittle and text   
+    """
+    
     def __init__(self, main_win):
         super().__init__()
         

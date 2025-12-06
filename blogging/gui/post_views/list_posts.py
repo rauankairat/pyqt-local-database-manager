@@ -5,6 +5,9 @@ from blogging.controller import Controller
 from .post_table_view import PostTableModel
 
 class listPosts(QWidget):
+    """
+        List posts in current blog
+    """
     def __init__(self, main_win):
         super().__init__()
         
@@ -35,7 +38,7 @@ class listPosts(QWidget):
         super().showEvent(event)
         self.reload()
 
-        
+
     def reload(self):
          
         cont = self.main_window.controller
