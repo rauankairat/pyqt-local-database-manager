@@ -58,7 +58,7 @@ class createBlog(QWidget):
         cont = self.main_window.controller
 
         try:
-            result = cont.create_blog(int(id),name,url,email)
+            result = cont.create_blog(id,name,url,email)
             msg = QMessageBox()
             msg.setText("successfully created blog")
 

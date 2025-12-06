@@ -6,6 +6,16 @@ from .blog_menu import blogMenu
 from .blog_views.search_blog import searchBlog
 from .blog_views.create_blog import createBlog
 from .blog_views.retrieve_blog import retrieveBlog
+from .blog_views.choose_blog import chooseBlog
+
+from .post_menu import postMenu
+from .post_views.create_post import createPost
+from .post_views.delete_post import deletePost
+from .post_views.list_posts import listPosts
+from .post_views.update_post import updatePost
+from .post_views.retrieve_posts import retrievePosts
+
+
 from .blog_views.update_blog import updateBlog
 from .blog_views.delete_blog import deleteBlog
 from .blog_views.list_blog import listBlog
@@ -47,16 +57,21 @@ class BloggingGUI(QMainWindow):
 
         self.widget= QStackedWidget()
         
-        self.widget.addWidget(loginGui(self))
-        self.widget.addWidget(blogMenu(self))
-        self.widget.addWidget(searchBlog(self))
-        self.widget.addWidget(createBlog(self))
-        self.widget.addWidget(retrieveBlog(self))
-        self.widget.addWidget(updateBlog(self))
-        self.widget.addWidget(deleteBlog(self))
-        self.widget.addWidget(listBlog(self))
-
-
+        self.widget.addWidget(loginGui(self)) #1
+        self.widget.addWidget(blogMenu(self)) #2
+        self.widget.addWidget(searchBlog(self)) #3
+        self.widget.addWidget(createBlog(self)) #4
+        self.widget.addWidget(retrieveBlog(self)) #5
+        self.widget.addWidget(updateBlog(self)) #6
+        self.widget.addWidget(deleteBlog(self)) #7
+        self.widget.addWidget(listBlog(self)) #8
+        self.widget.addWidget(chooseBlog(self)) #9
+        self.widget.addWidget(postMenu(self))#10
+        self.widget.addWidget(createPost(self))  #11
+        self.widget.addWidget(retrievePosts(self)) #12
+        self.widget.addWidget(updatePost(self)) #13
+        self.widget.addWidget(deletePost(self)) #14
+        self.widget.addWidget(listPosts(self)) #15
         
         self.setCentralWidget(self.widget)
         self.switchGui("login")
