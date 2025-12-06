@@ -31,7 +31,11 @@ class listPosts(QWidget):
         self.setLayout(layout)
 
        
-    
+    def showEvent(self, event):
+        super().showEvent(event)
+        self.reload()
+
+        
     def reload(self):
          
         cont = self.main_window.controller
